@@ -1,0 +1,56 @@
+{% extends "HR/simple-layout.html" %}
+{% block legend %}اطلاعات شناسنامه ای{% endblock %}
+{% block fieldes %}
+    <div class="row mt-5">
+        <div class="col-4">
+            <label for="Marriage">وضعیت تاهل: </label><br>
+                <select name="Marriage" id="Marriage">
+                    <option value="0" class="p">انتخاب کنید</option>
+                    {% for m in marriage_status %}
+                    <option  value="{{ m.id }}" {% if obj_edit.Marriage_Status_id == m.id %} selected {% endif %}>{{ m.Caption}}</option>
+                    {% endfor %}
+                </select>
+        </div>
+        <div class="col-4">
+            <label>تعداد فرزند</label><br>
+            <input type="number" id="number-of-children" min="0" max="10" value="{{ obj_edit.NumberOfChildren }}" name="number-of-children">
+        </div>
+        <div class="col-4">
+            <label for="Degree" class="Required">مدرک تحصیلی: </label><br>
+                <select name="Degree" id="Degree">
+                    <option value="0">انتخاب کنید</option>
+                    {% for E in degree_type %}
+                    <option  value="{{ E.id }}" {% if obj_edit.Degree_Type_id == E.id %} selected {% endif %}>{{ E.Caption}}</option>
+                    {% endfor %}
+                </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <label for="Military">نظام وظیفه: </label><br>
+                <select name="Military" id="Military">
+                    <option value="0">انتخاب کنید</option>
+                    {% for m in military_service %}
+                    <option  value="{{ m.id }}" {% if obj_edit.Military_Status_id == m.id %} selected {% endif %}>{{ m.Caption}}</option>
+                    {% endfor %}
+                </select>
+        </div>
+
+    </div>
+{#    <div class="row mb-5">#}
+{#        <div class="col-8">#}
+{#            <label>#}
+{#                <span class="label" for="About">توضیحات: </span><br>#}
+{#                <textarea class="mt-3" rows="5" cols="35" id="About" value="{{ obj_edit.About }}" name="About"> {{ obj_edit.About|default_if_none:'' }} </textarea>#}
+{#            </label>#}
+{#        </div>#}
+{#        <div class="col-4">#}
+{#            <span class="resume">آپلود رزومه </span><br>#}
+{#            <img src="/static/HR/images/Icon/Vector.png" id="cv-file" name="cv-file" class="cv-file">#}
+{#            <input type="file" value="{{ obj_edit.CVFile }}"  id="cv-file-up" name="cv-file"><br>#}
+{#            <span class="resume">برای</span>#}
+{#            <a class="resume" href="">دانلود رزومه</a>#}
+{#            <span class="resume">بتدا رزومه خودرا آپلود کنید</span>#}
+{#        </div>#}
+{#    </div>#}
+{% endblock %}

@@ -1,0 +1,274 @@
+/**********************Font Style Start*******************/
+@font-face
+{
+  font-family: Defined-Mina;
+  src: url("../font/MINA_SF.TTF");
+}
+@font-face
+{
+  font-family: Defined-Tabasom;
+  src: url("../font/BTABASSO.TTF");
+}
+@font-face
+{
+  font-family: Defined-Kamran;
+  src: url("../font/BKAMRANB.TTF");
+}
+@font-face
+{
+  font-family: Defined-Farnaz;
+  src: url("../font/FARNAZ.TTF");
+}
+@font-face
+{
+  font-family: Defined-Yekan;
+  src: url("../font/BYekan.TTF");
+}
+@font-face
+{
+  font-family: Defined-Titr;
+  src: url("../font/BTitrBd.TTF");
+}
+@font-face
+{
+  font-family: Defined-Roya;
+  src: url("../font/BRoyaBd.TTF");
+}
+
+@font-face
+{
+  font-family: Defined-Decorative;
+  src: url("../font/Mj_Decorative Bold_ufont.ir.TTF");
+}
+@font-face
+{
+  font-family: Defined-IranNastaliq;
+  src: url("../font/IranNastaliq.TTF");
+}
+
+
+ /**********************Font Style Start*******************/
+
+/**********************Global Style Start*******************/
+body
+{
+    direction: rtl;
+    background-color: #d7d1d1;
+    overflow-x: hidden ;
+}
+.background
+{
+    background-image: url("../images/background.jpg");
+    width: 100%;
+    height: 100%;
+    min-height: 1080px;
+    min-width: 1900px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+/**********************Global Style End*******************/
+
+/********************First Page Start**********************/
+.file
+{
+    background-image: url("../images/FirstPage/book.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 626px;
+    height: 923px;
+        text-align: center;
+    margin-top: 20px;
+    color: #d7d1d1;
+    z-index: 10;
+justify-content: center;
+    display: flex;
+}
+.profile .title
+{
+    font-family: Defined-IranNastaliq;
+    font-size: 45pt;
+    color: #d7d1d1;
+    margin-top: 20pt;
+    margin-bottom: 20pt;
+}
+.profile .fullname
+{
+    font-family: Defined-Mina;
+        font-size: 25pt;
+    padding-top: 20pt;
+}
+.profile .role
+{
+    font-family: Defined-Tabasom;
+    font-size: 20pt;
+    padding-top: 10pt;
+}
+.profile
+{
+    width: 200px;
+    /*border:solid 2px;*/
+    /*border-bottom-color:#ffe;*/
+    /*border-left-color:#eed;*/
+    /*border-right-color:#eed;*/
+    /*border-top-color:#ccb;*/
+    max-height:100%;
+    max-width:100%;
+}
+.profile .frame {
+  background-color:#ddc;
+  border:solid 3vmin #eee;
+  border-bottom-color:#fff;
+  border-left-color:#eee;
+  border-radius:2px;
+  border-right-color:#eee;
+  border-top-color:#ddd;
+  box-shadow:0 0 5px 0 rgba(0,0,0,.25) inset, 0 5px 10px 5px rgba(0,0,0,.25);
+  box-sizing:border-box;
+  display:inline-block;
+  /*margin:10vh 10vw;*/
+  /*height:80vh;*/
+  /*padding:8vmin;*/
+  position:relative;
+  text-align:center;
+
+}
+.bookmarks
+{
+    z-index: 0;
+}
+
+.bookmarks .bookmark .icon
+{
+    /*filter: invert(13%) sepia(94%) saturate(7466%) hue-rotate(0deg) brightness(94%) contrast(115%);*/
+}
+.bookmarks .bookmark label
+{
+    font-family: Defined-Kamran;
+    font-size: 20pt;
+    padding-left: 20px;
+}
+.bookmarks .bookmark
+{
+    box-shadow: #A89CA9 2px 5px 3px;
+    height: 75px;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+    margin-top: 15px;
+    padding-top: 15px;
+    padding-left: 15px;
+    width: 300px;
+    text-align: left;
+    right: -225px;
+    position: relative;
+    cursor: pointer;
+}
+.bookmarks .bookmark:hover
+{
+    right: -20px;
+}
+
+.bookmarks .bookmark.color1
+{
+    background-color: #BE8EB1;
+}
+.bookmarks .bookmark.color2
+{
+    background-color: #D5928C;
+}
+.bookmarks .bookmark.color3
+{
+    background-color: #E2C575;
+}
+.bookmarks .bookmark.color4
+{
+    background-color: #6DB1C9;
+}
+/********************First Page End**********************/
+
+/**********************Global Detail Style Start*******************/
+:root
+{
+    --page-background: #fdf4f4;
+    --min-height: 600px;
+    --page-radious:30px;
+}
+.book-cover
+{
+  min-height: var(--min-height)+50;
+    background-color: #2d3d46;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+
+}
+.information
+{
+    width: 800px;
+    background-color: var(--page-background);
+    min-height: var(--min-height);
+    z-index: 1;
+    border-radius: var(--page-radious) 0 0 var(--page-radious);
+}
+.book-middle
+{
+    min-height: var(--min-height);
+    width: 10px;
+}
+.book-middle.right
+{
+    background-image: linear-gradient(to right, gray, var(--page-background));
+}
+.book-middle.left
+{
+    background-image: linear-gradient(to left, gray, var(--page-background));
+}
+.page2
+{
+    width: 200px;
+    background-color: var(--page-background);
+    text-align: center;
+    border-radius: 0 var(--page-radious) var(--page-radious) 0;
+    min-height:var(--min-height);
+}
+.page2 .title,.page2 .subtitle
+{
+    font-family: Defined-IranNastaliq;
+}
+.page2 .title
+{
+    margin-top: 30px;
+    font-size: 30pt;
+}
+.page2 .subtitle
+{
+    font-size: 20pt;
+}
+
+
+.page2 .frame {
+    margin:30px auto;
+    border:10px solid #222;
+    width: 150px;
+    height: 160px;
+    -webkit-box-shadow:  0px 2px 3px 1px rgba(0, 0, 0, .5);
+    box-shadow:  0px 3px 5px 4px rgba(0, 0, 0, .3);
+    border-radius: 50%;
+}
+
+.page2  .border {
+    background:white;
+    width: 130px;
+    height: 140px;
+    -webkit-box-shadow: inset 3px 3px 2px 1px  rgba(0, 0, 0, .4);
+    box-shadow: inset 3px 3px 2px 1px  rgba(0, 0, 0, .4);
+    border-radius: 50%;
+
+}
+.page2 .frame .border img
+{
+    border-radius: 50%;
+    width: 130px;
+}
+/**********************Global Detail Style End*******************/
+

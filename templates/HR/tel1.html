@@ -1,0 +1,93 @@
+{%  load static %}
+{% block MainContent%}
+    <fieldset>
+        <legend>
+        شماره های تماس
+        </legend>
+
+        <table class="TableShow detail-table">
+                <thead>
+                    <tr>
+                        <th class="Textlist">شماره تماس</th>
+                        <th class="Textlist">عنوان </th>
+                        {% if edit_permission %}
+                        <th class="Textlist">عملیات</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                 {% for obj in phones %}
+                     <tbody>
+                     <tr>
+                         <td>{{ obj.TelNumber}}</td>
+                         <td>{{ obj.Title }}</td>
+                        {% if edit_permission %}
+                         <td>
+{#                            <img src="/static/HR/images/Icon/edit.svg" class="edit"  title="ویرایش" alt="ویرایش">#}
+{#                            <img src="/static/HR/images/Icon/del.svg" class="delete"  title="حذف" alt="حذف">#}
+                            <i class="fa-solid fa-edit"></i>
+                            <i class="fa-solid fa-trash"></i>
+                         </td>
+                         {% endif %}
+                     </tr>
+                     </tbody>
+                {% endfor %}
+            </table>
+            <span class="icon add">
+                <img src="/static/HR/images/icon/add.png" alt="اضافه كردن مورد جديد" class="icon" />
+            </span>
+            <div class="detail-fields">
+                <form name="frmPhoneNumber">
+                    {% csrf_token %}
+                    <button type="reset" class="hidden PhoneNumber"></button>
+                    <input type="hidden" name="UserName" value="{{ obj_edit.UserName }}">
+                    <input type="hidden" name="PhoneNumberId" />
+                    <div class="row main-content">
+                        <div class="row">
+                            <div class="col-4 mt-3">
+                                <label for="TelNumber" class="Required">شماره تماس: </label>
+                                <input type="text" class='inserttext' id="TelNumber" name="TelNumber"/>
+                            </div>
+                            <div class="col-4 mt-3">
+                                 <label for="TelType" class="Required">نوع: </label>
+                                        <select name="TelType" id="TelType">
+                                            <option value="0">انتخاب کنید</option>
+                                                  {% for ut in TelTypeChoices %}
+                                                      <option  value="{{ ut.ContValue }}" {% if obj_uni.TelType_id == m.id %} selected {% endif %}>{{ ut.Caption}}</option>
+                                                 {% endfor %}
+                                        </select>
+                            </div>
+                            <div class="col-4 mt-3">
+                                <label for="PhoneTitle" class="Required">عنوان : </label>
+                                <input type="text" minlength="2" maxlength="50" class='inserttext' id="PhoneTitle" name="PhoneTitle" placeholder="عنوان"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 mt-3">
+                                <label for="TelProvince" class="Required">استان : </label>
+                                    <select class="TelPlace" name="TelProvince" id="TelProvince">
+                                        <option  value="0">انتخاب کنید</option>
+                                        {% for p in ProvinceList %}
+                                        <option  value="{{ p.id }}">{{ p.ProvinceTitle }}</option>
+                                        {% endfor %}
+                                    </select>
+                            </div>
+                            <div class="col-4 mt-3">
+                                <label for="TelCity" class="Required">شهر : </label>
+                                    <select class="TelPlace" name="TelCity" id="TelCity">
+                                        <option class="p" value="0">انتخاب کنید</option>
+                                        {% for C in CityList %}
+                                        <option  value="{{ C.id }}" class="p{{ C.Province_id }}"> {{ C.CityTitle }}</option>
+                                        {% endfor %}
+                                    </select>
+                            </div>
+                        </div>
+                        <div class=" w-100 d-flex flex-row  justify-content-end " style="margin-top: 80px;margin-bottom: 8px;">
+                            <input type="button" name="cancel" class="col-2 Icon cancel mx-4 my-2" value="انصراف" data-type="Tel">
+                            <input type="button" name="save" class="col-2 Icon Save mx-4 my-2" value="ثبت" data-type="Tel" >
+                        </div>
+                    </div>
+                </form>
+            </div>
+    </fieldset>
+
+{% endblock %}

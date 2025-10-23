@@ -1,0 +1,76 @@
+{%  load static %}
+{% block MainContent%}
+    <div class="{% if not ValidPerson %} hidden {% endif %}">
+        <img src="{% static '/HR/images/Icon/refresh.png'%}" id="reset" name="reset" class="icon-t Reset">
+        <span class="Titr"> سوابق کاری</span>
+    </div>
+    <div class="row main-content {% if not ValidPerson %} hidden {% endif %}">
+        <table class="TableShow">
+            <thead>
+                <tr>
+                    <th class="Textlist">نام</th>
+                    <th class="Textlist">نام خانوادگی</th>
+                    <th class="Textlist">سمت </th>
+                    <th class="Textlist">تیم</th>
+                </tr>
+            </thead>
+             {% for obj in obj_History %}
+                 <tbody>
+                 <tr>
+                     <td>{{ obj.UserName.FirstName}}</td>
+                     <td>{{ obj.UserName.LastName }}</td>
+                     <td>{{ obj.RoleId.RoleName }}</td>
+                     <td>{{ obj.TeamCode.TeamName }}</td>
+
+                 </tr>
+                 </tbody>
+            {% endfor %}
+        </table>
+
+    </div>
+    <div class="mt-3 {% if  ValidPerson %} hidden {% endif %}">
+        <img src="{% static '/HR/images/Icon/new.png'%}" id="Save" name="Save" class="icon-t Save">
+        <span class="Titr "> جدید</span>
+    </div>
+    <form name="frmEmailAddress" method="post">
+    {% csrf_token %}
+
+    <input type="hidden" name="UserName" value="{{ obj_edit.UserName }}">
+
+    <div class="row main-content {% if  ValidPerson %} hidden {% endif %}">
+        <div class="col-6 mt-3">
+            <label for="Team" class="Required"> تیم: </label>
+                <select class="Team" name="Team" id="Team">
+                    <option  value="0">انتخاب کنید</option>
+                    {% for t in Team %}
+                    <option value="{{ t.TeamCode }}">
+                        {{ t.TeamName }}
+                    </option>
+                    {% endfor %}
+                </select>
+        </div>
+        <div class="col-6 mt-3">
+            <label for="Role" class="Required"> سمت: </label>
+                <select class="Role" name="Role" id="Role">
+                    <option  value="0">انتخاب کنید</option>
+                    {% for r in Role %}
+                    <option value="{{ r.RoleId }}">
+                        {{ r.RoleName }}
+                    </option>
+                    {% endfor %}
+                </select>
+        </div>
+        <div class="col-6 mt-3">
+            <label for="Level" > سطح: </label>
+                <select class="Level" name="Level" id="Level">
+                    <option  value="0">انتخاب کنید</option>
+                    {% for l in Level %}
+                    <option value="{{ l.LevelId }}">
+                        {{ l.LevelName }}
+                    </option>
+                    {% endfor %}
+                </select>
+        </div>
+    </div>
+    </form>
+{% endblock %}

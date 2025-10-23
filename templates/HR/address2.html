@@ -1,0 +1,106 @@
+{% extends "HR/detail-layout.html" %}
+{%  load static %}
+{% block legend %}ادرس های پستی{% endblock %}
+    <fieldset>
+        <legend>
+        آدرس های پستی
+        </legend>
+        <table class="TableShow detail-table">
+            <thead>
+                <tr>
+                    <th class="Textlist">عنوان</th>
+                    <th class="Textlist">کدپستی </th>
+                     <th class="Textlist">منطق </th>
+                    {% if edit_permission %}
+                    <th class="Textlist">عملیات</th>
+                    {% endif %}
+                </tr>
+            </thead>
+             {% for obj in obj_address %}
+                 <tbody>
+                 <tr>
+                     <td>{{ obj.Title}}</td>
+                     <td>{{ obj.PostalCode }}</td>
+                     <td>{{ obj.CityDistrict }}</td>
+                    {% if edit_permission %}
+                     <td>
+                        <img src="/static/HR/images/Icon/edit.svg" class="edit"  title="ویرایش" alt="ویرایش">
+                        <img src="/static/HR/images/Icon/del.svg" class="delete"  title="حذف" alt="حذف">
+                     </td>
+                     {% endif %}
+                 </tr>
+                 </tbody>
+            {% endfor %}
+        </table>
+        <span class="icon add">
+            <img src="/static/HR/images/icon/add.png" alt="اضافه كردن مورد جديد" class="icon" />
+        </span>
+        <div class="detail-fields">
+            <form name="frmPostalAddress">
+            {% csrf_token %}
+            <button type="reset" class="hidden PostalAddress"></button>
+            <input type="hidden" name="UserName" value="{{ obj_edit.UserName }}">
+            <input type="hidden" name="PostalAddressId">
+            <div class="row main-content">
+                <div class="row">
+                    <div class="col-4 mt-3">
+                        <label for="AddressProvince" class="Required">استان : </label>
+                            <select class="AddressPlace ParentCombo" name="AddressProvince" id="AddressProvince" data-child="AddressCity">
+                                <option  value="0">انتخاب کنید</option>
+                                {% for p in Province %}
+                                <option  value="{{ p.id }}">{{ p.ProvinceTitle }}</option>
+                                {% endfor %}
+                            </select>
+                    </div>
+                    <div class="col-4 mt-3">
+                        <label for="AddressCity" class="Required">شهر : </label>
+                            <select class="AddressPlace" name="AddressCity" id="AddressCity" >
+                                <option class="p" value="0">انتخاب کنید</option>
+                                {% for C in City %}
+                                <option  value="{{ C.id }}" class="p{{ C.Province_id }}"> {{ C.CityTitle }}</option>
+                                {% endfor %}
+                            </select>
+                    </div>
+                    <div class="col-4 mt-3">
+                        <label for="CityDistrict">ناحیه: </label>
+                            <select name="CityDistrict" id="CityDistrict">
+                                <option value="0">انتخاب کنید</option>
+                                {% for CD in CityDistrict %}
+                                <option  value="{{ CD.id }}" class="p{{ CD.City_id }}"> {{ C.DistrictTitle }}</option>
+                                {% endfor %}
+                            </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4 mt-3">
+                        <label for="AddressTitle" class="Required">عنوان: </label>
+                        <input type="text" minlength="3" maxlength="100" class='inserttext' id="AddressTitle" name="AddressTitle">
+                    </div>
+                    <div class="col-4 mt-3">
+                        <label for="PostalCode">کدپستی : </label>
+                        <input type="text" class='inserttext' id="PostalCode" name="PostalCode">
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <label for="AddressText" class="Required">ادرس : </label>
+                    <input type="text"  maxlength="500" class='inserttext' id="AddressText" name="AddressText">
+                </div>
+                <div class="row">
+                    <div class="col-4 mt-3">
+                        <label for="No" >پلاک : </label>
+                        <input type="text"  minlength="1" maxlength="20"  class='inserttext' id="No" name="No" >
+                    </div>
+                    <div class="col-4 mt-3">
+                        <label for="UnitNo" >شماره واحد : </label>
+                        <input type="text" minlength="1" maxlength="100"  class='inserttext' id="UnitNo" name="UnitNo" >
+                    </div>
+                </div>
+                <div class=" w-100 d-flex flex-row  justify-content-end " >
+                    <input type="button" name="cancel" class="col-2 Icon cancel mx-4 my-2" value="انصراف" data-type="Address">
+                    <input type="button" name="save" class="col-2 Icon Save mx-4 my-2" value="ثبت" data-type="Address" >
+                </div>
+            </div>
+            </form>
+        </div>
+    </fieldset>

@@ -1,0 +1,38 @@
+{#{% extends "HR/layout1.html" %}#}
+{%  load static %}
+<div class="Menu d-flex flex-row mt-4 mb-3 justify-content-center">
+    <span class="d-flex panel-menu flex-column mx-5 align-items-center" data="main-info">
+        <img class="logogray logo" src="{% static '/HR/images/Icon/user-Gray.png' %}" id="user">
+        <span class="Titr-menu mt-2">مشخصات شناسنامه ای</span>
+    </span>
+    <span class="d-flex panel-menu {% if not ValidPerson %} disabled {% endif %} flex-column mx-5 align-items-center" data="user-info">
+        <img class="logogray logo" src="{% static '/HR/images/Icon/Personeli-Gray.png' %}" id="Personeli">
+        <span class="Titr-menu mt-2">اطلاعات شخصی</span>
+
+    </span>
+    <span class="d-flex panel-menu {% if not ValidPerson %} disabled {% endif %} flex-column mx-5 align-items-center" data="user-education">
+        <img class="logogray logo" src="{% static '/HR/images/Icon/education-Gray.png' %}" id="education">
+        <span class="Titr-menu mt-2">سوابق تحصیلی </span>
+    </span>
+    <span class="d-flex panel-menu {% if not ValidPerson %} disabled {% endif %} flex-column mx-5 align-items-center" data="user-email">
+        <img class="logogray logo" src="{% static '/HR/images/Icon/email-Gray.png' %}" id="email">
+        <span class="Titr-menu mt-2">پست الکترونیکی </span>
+    </span>
+    <span class="d-flex panel-menu {% if not ValidPerson %} disabled {% endif %} flex-column mx-5 align-items-center" data="user-tel">
+        <img class="logogray logo" src="{% static '/HR/images/Icon/tel-Gray.png' %}" id="tel">
+        <span class="Titr-menu mt-2">شماره تماس</span>
+    </span>
+    <span class="d-flex panel-menu {% if not ValidPerson %} disabled {% endif %} flex-column mx-5 align-items-center" data="user-address">
+        <img class="logogray logo" src="{% static '/HR/images/Icon/address-Gray.png' %}" id="address">
+        <span  class="Titr-menu mt-2">آدرس پستی</span >
+    </span>
+    <span class="d-flex panel-menu flex-column mx-5 align-items-center" data="user-history">
+        <img class="logogray logo" src="{% static '/HR/images/Icon/address-Gray.png' %}" id="history">
+        <span  class="Titr-menu mt-2">سوابق کاری</span >
+    </span>
+    <span class="d-flex panel-menu flex-column mx-5 align-items-center {% if not ValidPerson %} disabled {% endif %}" data="user-costprice">
+        <img class="logogray logo " src="{% static '/HR/images/Icon/address-Gray.png' %}" id="costprice">
+        <span  class="Titr-menu mt-2">بهای تمام شده</span >
+    </span>
+</div>
+

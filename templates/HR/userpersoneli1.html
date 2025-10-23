@@ -1,0 +1,97 @@
+{%  load static %}
+{% block MainContent%}
+<form method="post" name="frmUser">
+          {% csrf_token %}
+    <div class="main-content row">
+        <div class="col-9 row">
+            <div class="row">
+                <div class="col-4">
+                    <label class="Required">نام کاربری</label>
+                    <input type="text" id="username" minlength="5" maxlength="100" name="username" value="{{ obj_edit.UserName }}" placeholder="مثال UserName@eit">
+                </div>
+                <div class="col-4">
+                    <label class="Required"> نام</label><br>
+                    <input type="text" id="fname" minlength="3" maxlength="200" name="fname" value="{{ obj_edit.FirstName }}">
+                </div>
+                <div class="col-4">
+                    <label class="Required"> نام خانوادگی  </label>
+                    <input type="text" id="lname" minlength="3" maxlength="200" name="lname" value="{{ obj_edit.LastName }}">
+                </div>
+
+            </div>
+            <div class="row mt-3">
+                <div class="col-4">
+                    <label class="Required">کدملی</label><br>
+                    <input type="text"  id="NationalCode"  minlength="10" maxlength="10" name="Code" value="{{ obj_edit.NationalCode }}">
+                </div>
+                <div class="col-4">
+                     <label class="Required" for="Birthday"> تاریخ تولد: </label>
+                     <input type="text" class="Eventdate pdatepicker w-60 form-control" value="{{ obj_edit.BirthDate|date:'Y/m/d' }}" name="Birthday"/>
+                </div>
+                <div class="col-4">
+                    <label class="Required"  name="Gender" class="Gender">جنسیت </label>
+                    <br>
+                    <input type="radio" checked name="Gender" class="Gender" id="Mela" value='1'>
+                    <label>آقا</label>
+                    <input type="radio" name="Gender" class="Gender" id="Female" value='0'>
+                     <label>خانم</label>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-4">
+                    <label>نام انگلیسی </label><br>
+                    <input type="text" id="fename" minlength="3" maxlength="80" name="fename" value="{{ obj_edit.FirstNameEnglish }}">
+                </div>
+                <div class="col-4">
+                    <label>نام خانوادگی انگلیسی </label><br>
+                    <input type="text" id="lename" minlength="3" maxlength="100" name="lename" value="{{ obj_edit.LastNameEnglish }}">
+                </div>
+
+            </div>
+            <div class="row mt-3">
+                <div class="col-4">
+                    <label  for="BirthProvince">استان تولد: </label><br>
+                        <select class="BirthPlace" name="BirthProvince" id="BirthProvince">
+                            <option  value="0">انتخاب کنید</option>
+                            {% for p in ProvinceList %}
+                            <option value="{{ p.id }}" {% if obj_edit.BirthCity.Province_id == p.id %} selected {% endif %}>
+                                    {{ p.ProvinceTitle }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                </div>
+                <div class="col-4">
+                    <label for="BirthCity">شهر تولد: </label><br>
+                        <select  class="BirthPlace" name="BirthCity" id="BirthCity">
+                            <option class="p" value="0">انتخاب کنید</option>
+                            {% for C in CityList %}
+                            <option value="{{ C.id }} " class="p{{ C.Province_id }}"  {% if obj_edit.BirthCity_id == C.id %} selected {% endif %}>{{ C.CityTitle }}</option>
+                            {% endfor %}
+                        </select>
+                </div>
+            </div>
+        </div>
+        <div class="h-100 col-3 d-flex flex-column align-items-center mt-5">
+
+                {% if not ValidPerson %}
+                <img src="{% static '/HR/images/Icon/Male.png' %}" src-m="{% static '/HR/images/Icon/Male.png' %}" src-f="{% static '/HR/images/Icon/Female.png' %}"  id="AvatarBoy" class="Avatar mt-4">
+                 {% else %}
+                <img src="/media/HR/PersonalPhoto/{{ obj_edit.user_image_name }}" alt="{{ obj_edit.UserName }}" id="AvatarBoy" class="Avatar mt-4">
+                    {% endif %}
+                 <input type="file" name="Avatar" id="AvatarFile" style="display: none" accept=".jpg, .png, .jpeg, .gif, .bmp">
+
+            <div class=" w-100 d-flex flex-row justify-content-between " style="margin-top: 80px;margin-bottom: 8px;">
+                    <input taye="submit" name="cancel" class="col-6 Icon cancel" value="انصراف" data="User">
+                   <input taye="submit" name="save" class="col-6 Icon Save" value="ثبت" data="User" >
+            </div>
+        </div>
+
+    </div>
+
+</form>
+{#    {% include 'HR/user-personeli2.html' %}#}
+{#    {% include 'HR/education2.html' %}#}
+{#    {% include 'HR/email.html' %}#}
+{#       {% include 'HR/tel.html' %}#}
+{#    {% include 'HR/address.html' %}#}
+{% endblock %}

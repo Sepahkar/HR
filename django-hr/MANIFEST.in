@@ -1,0 +1,7 @@
+include LICENSE
+include README.rst
+recursive-include HR/static *
+recursive-include HR/templates *
+recursive-include HR/DBRouters *
+recursive-include HR/.env *
+recursive-include docs *

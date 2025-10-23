@@ -1,0 +1,58 @@
+{%  load static %}
+    <fieldset>
+        <legend>
+        آدرس های ايميل
+        </legend>
+        <table class="TableShow detail-table">
+            <thead>
+                <tr>
+                    <th class="Textlist">ادرس الکترونیکی</th>
+                    <th class="Textlist">عنوان </th>
+                    {% if edit_permission %}
+                    <th class="Textlist">عملیات</th>
+                    {% endif %}
+                </tr>
+            </thead>
+             {% for obj in emails %}
+                 <tbody>
+                 <tr>
+                     <td>{{ obj.Email}}</td>
+                     <td>{{ obj.Title }}</td>
+                    {% if edit_permission %}
+                     <td>
+{#                        <img src="/static/HR/images/Icon/edit.svg" class="edit"  title="ویرایش" alt="ویرایش">#}
+{#                        <img src="/static/HR/images/Icon/del.svg" class="delete"  title="حذف" alt="حذف">#}
+                     </td>
+                     {% endif %}
+                 </tr>
+                 </tbody>
+            {% endfor %}
+        </table>
+        <span class="icon add">
+            <img src="/static/HR/images/icon/add.png" alt="اضافه كردن مورد جديد" class="icon" />
+        </span>
+
+        <div class="detail-fields">
+            <form name="frmEmailAddress" method="post">
+                {% csrf_token %}
+                <button type="reset" class="hidden EmailAddress"></button>
+                <input type="hidden" name="UserName" value="{{ obj_edit.UserName }}">
+                <input type="hidden" name="EmailAddressId" />
+                <div class="row main-content">
+                    <div class="col-6 mt-3">
+                        <label for="EmailTitle" class="Required"> عنوان: </label>
+                        <input type="text" minlength="2" maxlength="100" class='inserttext' id="EmailTitle" name="EmailTitle" >
+                    </div>
+                    <div class="col-6 mt-3">
+                        <label for="Email" class="Required">آدرس ایمیل: </label>
+                        <input type="email" minlength="5" maxlength="254" class='inserttext' id="Email" name="Email" >
+                    </div>
+                    <div class=" w-100 d-flex flex-row  justify-content-end " >
+                        <input type="button" name="cancel" class="col-2 Icon cancel mx-4 my-2" value="انصراف" data-type="EmailAddress">
+                        <input type="button" name="save" class="col-2 Icon Save mx-4 my-2" value="ثبت" data-type="EmailAddress" >
+                    </div>
+
+                </div>
+            </form>
+        </div>
+

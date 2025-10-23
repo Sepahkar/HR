@@ -1,0 +1,440 @@
+/**********************Font Style Start*******************/
+@font-face
+{
+  font-family: Defined-Mina;
+  src: url("../font/MINA_SF.TTF");
+}
+@font-face
+{
+  font-family: Defined-Tabasom;
+  src: url("../font/BTABASSO.TTF");
+}
+@font-face
+{
+  font-family: Defined-Kamran;
+  src: url("../font/BKAMRANB.TTF");
+}
+@font-face
+{
+  font-family: Defined-Farnaz;
+  src: url("../font/FARNAZ.TTF");
+}
+@font-face
+{
+  font-family: Defined-Yekan;
+  src: url("../font/BYekan.TTF");
+}
+@font-face
+{
+  font-family: Defined-Titr;
+  src: url("../font/BTitrBd.TTF");
+}
+@font-face
+{
+  font-family: Defined-Roya;
+  src: url("../font/BRoyaBd.TTF");
+}
+
+@font-face
+{
+  font-family: Defined-Decorative;
+  src: url("../font/Mj_Decorative Bold_ufont.ir.TTF");
+}
+@font-face
+{
+  font-family: Defined-IranNastaliq;
+  src: url("../font/IranNastaliq.TTF");
+}
+@font-face
+{
+  font-family: Defined-Baseet;
+  src: url("../font/FarBaseet.TTF");
+}
+@font-face
+{
+  font-family: Defined-Sepahbod;
+  src: url("../font/Sepahbod.otf");
+}
+@font-face
+{
+  font-family: Defined-Aman;
+  src: url("../font/Far.Aman.ttf");
+}
+@font-face
+{
+  font-family: Defined-Janat;
+  src: url("../font/a-JannatLT-Bold.ttf");
+}
+@font-face
+{
+  font-family: Defined-Salamat;
+  src: url("../font/Salamat.ttf");
+}
+@font-face
+{
+  font-family: Defined-Fani;
+  src: url("../font/Far.Fanni.ttf");
+}
+@font-face
+{
+  font-family: Defined-Naskh;
+  src: url("../font/Mj_Naskh Titr.ttf");
+}
+
+
+ /**********************Font Style Start*******************/
+
+/**********************Global Style Start*******************/
+body
+{
+    direction: rtl;
+    background-color: #d7d1d1;
+    overflow-x: hidden ;
+}
+.background
+{
+    background-image: url("../images/background.jpg");
+    width: 100%;
+    height: 100%;
+    min-height: 675px;
+    min-width: 1200px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+/**********************Global Style End*******************/
+
+/********************First Page Start**********************/
+.file
+{
+    background-image: url("../images/FirstPage/book.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 400px;
+    height: 600px;
+    text-align: center;
+    margin-top: 20px;
+    color: #d7d1d1;
+    z-index: 10;
+    justify-content: center;
+    display: flex;
+}
+.profile .title
+{
+    font-family: Defined-IranNastaliq;
+    font-size: 40pt;
+    color: #d7d1d1;
+    margin-top: 20pt;
+    margin-bottom: 20pt;
+}
+.profile .fullname
+{
+    font-family: Defined-Mina;
+        font-size: 23pt;
+    padding-top: 20pt;
+}
+.profile .role
+{
+    font-family: Defined-Tabasom;
+    font-size: 18pt;
+    padding-top: 10pt;
+}
+.profile
+{
+    width: 200px;
+    max-height:100%;
+    max-width:100%;
+}
+.profile .frame {
+  background-color:#ddc;
+  border:solid 3vmin #eee;
+  border-bottom-color:#fff;
+  border-left-color:#eee;
+  border-radius:2px;
+  border-right-color:#eee;
+  border-top-color:#ddd;
+  box-shadow:0 0 5px 0 rgba(0,0,0,.25) inset, 0 5px 10px 5px rgba(0,0,0,.25);
+  box-sizing:border-box;
+  display:inline-block;
+  position:relative;
+  text-align:center;
+
+}
+/******************************First Page End************************/
+/********************************bookmark start***********************/
+.content
+{
+    position: relative;
+    display: flex;
+    right: 110px;
+}
+.bookmarks
+{
+    z-index: 0;
+    margin-top: 50px;
+}
+
+.bookmarks .bookmark .icon
+{
+    /*filter: invert(13%) sepia(94%) saturate(7466%) hue-rotate(0deg) brightness(94%) contrast(115%);*/
+    height: 50px;
+}
+.bookmarks .bookmark a
+,.bookmarks .bookmark a:visited
+
+{
+    color: #1e1d10;
+}
+.bookmarks .bookmark a:hover
+{
+    color: #e3e1e1;
+    text-shadow: 0 0 2px #1e1d10;
+}
+.bookmarks .bookmark label
+{
+    font-family: Defined-Kamran;
+    font-size: 20pt;
+    padding-left: 20px;
+    cursor: pointer;
+
+}
+
+.bookmarks .bookmark
+{
+    box-shadow: #A89CA9 2px 5px 3px;
+    height: 75px;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+    margin-top: 15px;
+    padding-top: 15px;
+    padding-left: 15px;
+    width: 300px;
+    text-align: left;
+    right: -225px;
+    position: relative;
+    cursor: pointer;
+}
+.bookmarks .bookmark:hover
+{
+    right: -20px;
+}
+
+.bookmarks .bookmark.color1
+{
+    background-color: #BE8EB1;
+}
+.bookmarks .bookmark.color2
+{
+    background-color: #D5928C;
+}
+.bookmarks .bookmark.color3
+{
+    background-color: #E2C575;
+}
+.bookmarks .bookmark.color4
+{
+    background-color: #6DB1C9;
+}
+.bookmarks .bookmark.active,
+.bookmarks .bookmark.active:hover
+{
+    right: -100px;
+    color: #ffda76;
+    text-shadow: 2px 2px 4px #625b00;
+}
+.bookmarks .bookmark.active .icon
+{
+    filter: invert(0%) sepia(0%) saturate(10247%) hue-rotate(240deg) brightness(100%) contrast(100%);
+}
+/********************************bookmark end***********************/
+
+
+/**********************Global Detail Style Start*******************/
+:root
+{
+    --page-background: #fbf6f6;
+    --min-height: 600px;
+    --page-radious:30px;
+}
+.book-cover
+{
+  min-height: var(--min-height)+50;
+    background-color: #2d3d46;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+}
+.information
+{
+    width: 500px;
+    background-color: var(--page-background);
+    min-height: var(--min-height);
+    z-index: 1;
+    border-radius: var(--page-radious) 0 0 var(--page-radious);
+}
+.book-middle
+{
+    min-height: var(--min-height);
+    width: 10px;
+}
+.book-middle.right
+{
+    background-image: linear-gradient(to right, gray, var(--page-background));
+}
+.book-middle.left
+{
+    background-image: linear-gradient(to left, gray, var(--page-background));
+}
+.page2
+{
+    width: 130px;
+    background-color: var(--page-background);
+    text-align: center;
+    border-radius: 0 var(--page-radious) var(--page-radious) 0;
+    min-height:var(--min-height);
+}
+.page2 .title,.page2 .subtitle
+{
+    font-family: Defined-IranNastaliq;
+}
+.page2 .title
+{
+    margin-top: 30px;
+    font-size: 20pt;
+}
+.page2 .subtitle
+{
+    font-size: 15pt;
+}
+.page2 .role
+{
+    font-family: Defined-Salamat;
+}
+.page2 .fullname
+{
+
+    font-family: Defined-Janat;
+}
+
+
+.page2 .frame {
+    margin:20px auto;
+    border:7px solid #222;
+    width: 115px;
+    height: 115px;
+    -webkit-box-shadow:  0px 2px 3px 1px rgba(0, 0, 0, .5);
+    box-shadow:  0px 3px 5px 4px rgba(0, 0, 0, .3);
+    border-radius: 50%;
+}
+
+.page2  .border {
+    background:white;
+    width: 100px;
+    height: 100px;
+    -webkit-box-shadow: inset 3px 3px 2px 1px  rgba(0, 0, 0, .4);
+    box-shadow: inset 3px 3px 2px 1px  rgba(0, 0, 0, .4);
+    border-radius: 50%;
+
+}
+.page2 .frame .border img
+{
+    border-radius: 50%;
+    width: 90px;
+}
+/**********************Global Detail Style End*******************/
+
+.information .container table
+{
+    margin-top: 10px;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+}
+.information .container table thead tr
+{
+    background-color: #36304a;
+
+}
+.information
+{
+    padding: 10px;
+}
+
+.information .container table thead th {
+    font-family: Defined-Sepahbod;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.information .container table tbody tr
+{
+    font-size: 16px;
+    color: #808080;
+    display: table-row;
+    font-family: Defined-Baseet;
+}
+.information .container table tbody tr:nth-child(even)
+{
+    background-color: #def0fd;
+}
+.information .container table tbody tr:nth-child(odd)
+{
+    background-color: #f4fbfd;
+}
+
+.information .container table tbody tr:hover
+{
+    background-color: #ebe6e6;
+}
+
+.information .container table tbody td
+{
+    padding: 2px 5px 2px 5px;
+}
+.information .container table th:last-child,
+.information .container table td:last-child
+{
+    text-align: left;
+    padding-left: 10px;
+}
+.icon.add
+{
+    width: 29px;
+}
+.icon.add::after
+{
+    content: "اضافه كردن مورد جديد";
+    font-family: Defined-Titr;
+}
+.detail-fields
+{
+    height: 0;
+    overflow: hidden;
+}
+
+fieldset
+{
+    margin-top: 20px;
+    border: 1px solid silver;
+    border-radius: 15px;
+    padding: 0 10px 10px 10px;
+    background-color: white;
+}
+
+fieldset legend {
+    font-size: 18px;
+    font-family: Defined-Naskh;
+    margin-right: 20px;
+    color: #1d143c;
+    position: relative;
+    top: -18px;
+    background-color: white;
+    width: auto;
+    padding: 0 5px 0 5px;
+}
