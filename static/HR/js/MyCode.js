@@ -315,6 +315,11 @@ $(".cv-file").click(
 
 $(".pdatepicker").persianDatepicker({
             format: 'YYYY/MM/DD',
+            calendar:{
+                persian: {
+                    leapYearMode: 'astronomical'
+                }
+        }
 
  });
 
@@ -356,6 +361,20 @@ $("#UniversityType").change(
 function Validator(RecordType)
 {
 
+    function UsernameValidator(){
+        let N = $("#user_name")
+        let r = 0
+        let username = N.val()
+        let errmsg="<span class='ErrorMessage'>نام کاربری معتبر نیست</span>"
+
+        const valid_username_regex=/^[a-zA-Z0-9_.-]+$/
+
+        if (!valid_username_regex.test(username)){
+            N.parent().before(errmsg)
+            return -1;
+        }
+        return r
+    }
     function NationalCodeValidator()
     {
         let N = $("#national_code")
@@ -427,6 +446,7 @@ function Validator(RecordType)
     {
         let e = 0
         e += NationalCodeValidator()
+        e += UsernameValidator()
         let m=$('#Military').val()
         let g = $('[name="Gender"]').val()
         if ((g = 0 && m!=='خانم ها'))
@@ -527,6 +547,11 @@ function Save(SaveIcon)
     e = 0
     e = Validator(detail_type)
     let Form = $("form[name='frm"+detail_type+"']")
+
+    //جلوگیری از درج کارکتر غیرمجاز در نام کاربری
+    val = $('#user_name').val()
+    val = val.replace(/[^a-zA-Z.]/g, '')
+    $('#user_name').val(val)
 
     if (e >= 0)
     {
@@ -867,7 +892,9 @@ $('input').keyup(
         let last_name =  ( $('#txt-lastname').val()) ? '[data-value*="' +   $('#txt-lastname').val() + '"]':''
         let team =  ( $('#txt-team').val()) ? '[data-value*="' +   $('#txt-team').val() + '"]':''
         let role =  ( $('#txt-role').val()) ? '[data-value*="' +   $('#txt-role').val() + '"]':''
-        $('.item-name'+name).parent().find('.item-lastname'+last_name).parent().find('.item-team'+team).parent().find('.item-role'+role).parent().show()
+        let username =  ( $('#txt-username').val()) ? '[data-value*="' +   $('#txt-username').val() + '"]':''
+
+        $('.item-name'+name).parent().find('.item-username'+username).parent().find('.item-lastname'+last_name).parent().find('.item-team'+team).parent().find('.item-role'+role).parent().show()
          //$('.tr-href:visible:nth-child(odd)').css("background-color","red")
         $('.tr-href').not('[style*="display: none;"]').each(function(index,item){
                 if(index % 2 == 0){

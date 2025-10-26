@@ -589,9 +589,9 @@ tr.oddrow:nth-child(odd){
 
 .bookmarks .bookmark.active,
 .bookmarks .bookmark.active:hover{
-    right: -100px;
-    color: #ffda76;
-    text-shadow: 2px 2px 4px #625b00;
+    right: 0;
+    color: #433455;
+    /*text-shadow: 2px 2px 4px #625b00;*/
 }
 
 .bookmarks .bookmark.active .icon{
@@ -1147,6 +1147,7 @@ li a{
 }
 
 .payment-page .highcharts-figure,
+.facilities-page .highcharts-figure,
 .payment-page .highcharts-data-table table {
     min-width: 310px;
     max-width: 800px;
@@ -1163,6 +1164,7 @@ li a{
     max-width: 500px;
 }
 
+.facilities-page .highcharts-data-table caption ,
 .payment-page .highcharts-data-table caption {
     padding: 1em 0;
     font-size: 1.2em;
@@ -1170,6 +1172,7 @@ li a{
     font-family: Defined-Titr;
 }
 
+.facilities-page figure li,
 .payment-page figure li {
     font-family: Defined-Homa;
     font-size: 0.8rem;
@@ -1180,12 +1183,15 @@ li a{
 /*    font-size: 0.8rem;*/
 /*}*/
 
-.payment-page figure li b{
+.facilities-page figure li b,
+.payment-page figure li b
+{
     font-weight: bolder;
     padding-left: 6px;
 }
 
-.highcharts-figure ul{
+.highcharts-figure ul
+{
     padding-left: 0;
     color: #3c4d62;
     font-size: 0.8rem;
@@ -1197,17 +1203,21 @@ li a{
 }
 
 
+.facilities-page .filter span.active,
 .payment-page .filter span.active{
     color: #5696f1;
 }
 
 
 
-.payment-page .filter span:hover{
+.facilities-page .filter span:hover,
+.payment-page .filter span:hover
+{
     background-color: #ecedf1;
     /*color:white;*/
 }
 
+.facilities-page .filter .menu span,
 .payment-page .filter .menu span
 {
     width: 90px;
@@ -1221,11 +1231,14 @@ li a{
     align-items: center;
         margin-right: -20px;
 }
+.facilities-page .filter .menu:first-child,
 .payment-page .filter .menu:first-child
 {
     margin-top: 40px;
 }
-.payment-page .filter .menu span.active{
+.facilities-page .filter .menu span.active,
+.payment-page .filter .menu span.active
+{
     color: #08b7df;
     background-color: #eaffee;
     height: 100%;
@@ -1235,17 +1248,22 @@ li a{
 {
 
 }
-.payment-page .filter .navigation.top div{
+.facilities-page .filter .navigation.top div,
+.payment-page .filter .navigation.top div
+{
      font-family: 'Defined-Titr';
     margin: 5px;
 }
 
-.payment-page .filter .navigation.top span{
+.facilities-page .filter .navigation.top span,
+.payment-page .filter .navigation.top span
+{
     padding: 0px 10px 0px 10px;
     margin-top: 20px;
     margin-right: 10px;
     cursor: pointer;
 }
+.facilities-page .filter .navigation.top .roles span,
 .payment-page .filter .navigation.top .roles span
 {
     min-width: 150px;
