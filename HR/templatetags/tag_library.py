@@ -1,6 +1,28 @@
 from django import template
+import re
 
 register = template.Library()
+
+persian_digits = {
+    '0': '۰',
+    '1': '۱',
+    '2': '۲',
+    '3': '۳',
+    '4': '۴',
+    '5': '۵',
+    '6': '۶',
+    '7': '۷',
+    '8': '۸',
+    '9': '۹',
+}
+
+@register.filter(name='to_persian')
+def to_persian(value):
+    """Convert numbers in a string or non-string to Persian format."""
+    if value is None or value == "": 
+        return 
+    value_str = str(value)
+    return re.sub(r'[0-9]', lambda x: persian_digits[x.group()], value_str)
 
 @register.filter()
 def zarb(num1,num2):
@@ -51,4 +73,8 @@ def concat_str(val1,val2):
 
 
 
-
+@register.filter(name="active_bookmark")
+def active_bookmark(value, arg):
+    if str(value) == arg:
+        return 'active'
+    return ''

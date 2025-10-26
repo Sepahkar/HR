@@ -9,9 +9,12 @@
     <div class="d-flex col-12 mt-5 flex-row">
         <input  id="txt-name" type="text" class="mx-5 search_x" data-value="item-name" placeholder="نام">
         <input id="txt-lastname" type="text"class="mx-5 search_x" data-value="item-lastname" placeholder=" نام خانوادگی">
+        <input id="txt-username" type="text"class="mx-5 search_x" data-value="item-username" placeholder="نام کاربری">
         <input id="txt-role" type="text" class="mx-5 search_x" data-value="item-role" placeholder="سمت">
         <input  id="txt-team"  type="text" class="mx-5 search_x" data-value="item-team" placeholder="تیم">
     </div>
+<br/>
+
     <table class="user-list table" border="2">
         <tr>
             <th class="Textlist">نام</th>
@@ -21,42 +24,40 @@
             <th class="Textlist">تاریخ استخدام</th>
             <th class="Textlist">سمت</th>
             <th class="Textlist">تیم</th>
-            <th class="Textlist">وضعیت فعال بودن</th>
+            <th class="Textlist">کاربر فعال است</th>
+            <th class="Textlist">سمت کاربر فعال است</th>
         </tr>
-            {% for obj in obj_info %}
+            {% for obj in obj_list %}
 
 {#                    <tr class="tr-href oddrow" data-href="{% url 'HR:hr_firstpage' obj.UserName.UserName  %}">#}
-                    <tr class="tr-href oddrow" data-href="/HR/{{ obj.UserName.UserName }}">
-                        <td class="item-name" data-value="{{ obj.UserName.FirstName}}">
-                            {{ obj.UserName.FirstName}}
+                    <tr class="tr-href oddrow" data-href="/HR/{{ obj.NationalCode }}">
+                        <td class="item-name" data-value="{{ obj.FirstName}}">
+                            {{ obj.FirstName}}
                         </td>
-                        <td class="item-lastname" data-value="{{ obj.UserName.LastName}}">
-                            {{ obj.UserName.LastName}}
+                        <td class="item-lastname" data-value="{{ obj.LastName}}">
+                            {{ obj.LastName }}
                         </td>
-                        <td class="item-username" data-value="{{ obj.UserName.UserName}}">
-                            {{ obj.UserName.UserName}}
+                        <td class="item-username" data-value="{{ obj.UserName}}">
+                            {{ obj.UserName}}
                         </td>
-                        <td class="item-nationalcode" data-value="{{ obj.UserName.NationalCode}}">
-                            {{ obj.UserName.NationalCode|default_if_none:'....'}}
+                        <td class="item-nationalcode" data-value="{{ obj.NationalCode}}">
+                            {{ obj.NationalCode|default_if_none:'....'}}
                         </td>
-                        <td class="item-contractdate" data-value="{{ obj.UserName.ContractJDate }}">
-                            {{ obj.UserName.ContractJDate|default_if_none:'....' }}
+                        <td class="item-contractdate" data-value="{{ obj.ContractDate }}">
+                            {{ obj.ContractDate|default_if_none:'....' }}
                         </td>
-                        <td class="item-role" data-value="{{ obj.RoleId.RoleName }}">
-                            {{ obj.RoleId.RoleName }}
+                        <td class="item-role" data-value="{{ obj.RoleName }}">
+                            {{ obj.RoleName }}
                         </td>
-                        <td class="item-team" data-value="{{ obj.TeamCode.TeamName }}">
-                            {{ obj.TeamCode.TeamName }}
+                        <td class="item-team" data-value="{{ obj.TeamName }}">
+                            {{ obj.TeamName }}
                         </td>
-                          {% if obj.EndDate %}
-                             <td>
-                                 <img class="img icon_check" src="/static/HR/images/Icon/Cancel.png">
-                             </td>
-                          {% else %}
-                            <td>
-                                <img class="img icon_check" src="/static/HR/images/Icon/Confirm.png">
-                            </td>
-                          {% endif %}
+                        <td>
+                            <img class="img icon_check" src="/static/HR/images/Icon/{% if obj.UserActive %}Confirm{% else %}Cancel{% endif %}.png">
+                        </td>
+                        <td>
+                            <img class="img icon_check" src="/static/HR/images/Icon/{% if obj.RoleActive  %}Confirm{% else %}Cancel{% endif %}.png">
+                        </td>
                     </tr>
 
             {% endfor %}

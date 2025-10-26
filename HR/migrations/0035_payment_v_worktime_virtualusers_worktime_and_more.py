@@ -78,7 +78,6 @@ class Migration(migrations.Migration):
                 'verbose_name': 'اطلاعات چارگون',
                 'verbose_name_plural': 'اطلاعات چارگون',
                 'db_table': 'WorkTime',
-                'managed': False,
             },
         ),
         migrations.CreateModel(
@@ -139,9 +138,6 @@ class Migration(migrations.Migration):
             model_name='userteamrole',
             name='UserName',
             field=models.ForeignKey(db_column='UserName', on_delete=django.db.models.deletion.CASCADE, related_name='UserTeamRoleUserNames', to='HR.users', verbose_name='نام کاربری'),
-        ),
-        migrations.DeleteModel(
-            name='CustomUserSimpleLazyObject',
         ),
         migrations.AddField(
             model_name='previoususerteamrole',

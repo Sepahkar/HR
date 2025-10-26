@@ -22,10 +22,8 @@
         <td>{{ obj.Email}}</td>
         <td>{{ obj.Title }}</td>
         <td>{% if obj.IsDefault %}
-{#           <img class="img icon_check"  src="/static/HR/images/Icon/Confirm.png">#}
                <i class="fa-solid fa-check"></i>
         {% else %}
-{#            <img class="img icon_check" src="/static/HR/images/Icon/Cancel.png">#}
                <i class="fa-solid fa-check"></i>
         {% endif %}</td>
             <td class="hidden">
@@ -40,7 +38,6 @@
         {% endfor %}
 {% endblock %}
 {% block fieldes %}
-{#        <div class="row EmailAddress main-content">#}
             <div class="col-12 mt-3">
                 <label for="EmailTitle"> عنوان: </label>
                 <input type="text" minlength="2" maxlength="100" class='insert_text' id="EmailTitle" name="EmailTitle" >
@@ -52,5 +49,4 @@
                 <input type="checkbox" class="is_default" class='IsDefault' id="IsDefault" name="IsDefault" >
                 <label for="IsDefault" >ایمیل پیش فرض می باشد؟</label>
             </div>
-{#        </div>#}
 {% endblock %}

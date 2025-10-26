@@ -16,4 +16,9 @@ class Migration(migrations.Migration):
             name='MarriageStatus',
             field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='UsersMarriageStatus', to='HR.constvalue', verbose_name='وضعیت تاهل'),
         ),
+        migrations.AddField(
+            model_name='users',
+            name='IsActive',
+            field=models.BooleanField(default=True, verbose_name='کاربر فعال است؟'),
+        ),
     ]

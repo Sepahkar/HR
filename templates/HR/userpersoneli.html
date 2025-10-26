@@ -33,11 +33,11 @@
             </div>
             <div class="item-information">
                  <label  for="birthday"> تاریخ تولد: </label>
-                 <input type="text" class="Eventdate pdatepicker w-60 date form-control" value="{{ obj_person.BirthDate|date:'Y/m/d' }}" name="birthday"/>
+                 <input type="text" class="Eventdate pdatepicker w-60 date form-control" value="{{ obj_person.BirthDateMiladi|date:'Y/m/d' }}" name="birthday"/>
             </div>
             <div class="item-information">
                <label for="contract-date"  class="Required">تاریخ استخدام: </label>
-                <input type="text" value="{{ obj_person.ContractDate|date:'Y/m/d' }}" class="Eventdate pdatepicker date w-60 form-control" name="contract-date" />
+                <input type="text" value="{{ obj_person.ContractDateMiladi|date:'Y/m/d' }}" class="Eventdate pdatepicker date w-60 form-control" name="contract-date" />
             </div>
         </div>
         <div class="row-information">
@@ -111,7 +111,7 @@
             </div>
         </div>
 
-        {% if not username %}
+        {% if not has_any_active_role %}
             <div class="row">
                 <div class="item-information">
                     <label for="team" class="Required">تیم</label>

@@ -4,7 +4,7 @@
 
    <div class="facilities-page">
         <div class="filter">
-            <div class="navigation">
+            <div class="navigation menu">
                 <span data-key="insurance-cost-chart" {% if current_chart == 'insurance-cost-chart' %}class="active"{% endif %}>
                     بیمه تکمیل درمان
                 </span>
@@ -44,9 +44,12 @@
 
         <input name="year_list" type="hidden" value="{{ year_list }}">
         <input name="year_number" type="hidden" value="{{ year_number }}">
-
+        {% if message|default:'' != ''  %}
+            <h3>{{ message }}</h3>
+        {% else %}
+        <div class="view-chart">
             <div class="filter">
-                <div class="navigation">
+                <div class="navigation top col-12">
                     {% if has_more_than_one_role %}
                         <div class="roles ">
                             {% for role in role_list %}
@@ -65,20 +68,6 @@
                     {% endif %}
                 </div>
             </div>
-        {% if message|default:'' != ''  %}
-            <h3>{{ message }}</h3>
-        {% else %}
-        <div class="view-chart">
-
-            <div class="filter">
-                <div class="navigation">
-                     <div class="years {% if not has_more_than_one_year %}hidden{% endif %}">
-                        {% for year in year_list %}
-                        <span {% if year.0 == year_number %}class="active"{% endif %}>{{ year.0}}</span>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
 
             <figure class="highcharts-figure" pie-chart style="display: none">
                 <div id="nahar-time-chart"></div>
@@ -93,8 +82,8 @@
                 <div id="nahar-time-average-chart"></div>
                 <p class="highcharts-description">
                     <ul>
-                        <li><b>هزینه پرداختی فرد:</b>مبلغی است که از خود فرد کسر گردیده است.</li>
-                        <li><b>هزینه پرداختی شرکت:</b>مبلغی است که شرکت به عنوان سوبسید برای شخص پرداخت کرده است.</li>
+                        <li><b>میانگین پرداختی افراد:</b>میانگین مبلغی است که افرادی با سمت  {{ role_title }} {{ level_title|default:'' }} پرداخت کرده اند.</li>
+                        <li><b>میانگین پرداختی شرکت:</b>میانگین مبلغی است که شرکت برای افرادی با سمت  {{ role_title }} {{ level_title|default:'' }} پرداخت کرده است.</li>
                     </ul>
                 </p>
             </figure>

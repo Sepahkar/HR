@@ -1,28 +1,25 @@
-import datetime
-import json
 import traceback
 
-from rest_framework.views import APIView
+from django.db import connections
+from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from HR.models import (
-    Users,
-    UserTeamRole,
+    PreviousUserTeamRole,
     Role,
     Team,
+    Users,
+    UserTeamRole,
     V_HR_RoleTarget,
     V_RoleTeam,
-    PreviousUserTeamRole,
 )
 from HR.serializers import (
+    TeamSerializer,
     UsersSerializer,
     UserTeamRoleSerializer,
-    AppUserAccessSerializer,
-    PermissionUserSerializer,
-    PermissionGroupSerializer,
-    AllTeamServiceSerializer,
+    UserTeamRoleWithNationalCodeSerializer,
 )
-from rest_framework import status
-from django.db import connections
 
 
 class AllUsers(APIView):
@@ -51,9 +48,21 @@ class GetUser(APIView):
 
         return Response(data={'state':'error'},status=status.HTTP_400_BAD_REQUEST)
 
+class GetUserByNationalCode(APIView):
+    def get(self, request, national_code):
+        try:
+            user = Users.objects.get(NationalCode=national_code)
+            serializer = UsersSerializer(user)
+            return Response({'data':serializer.data},status=status.HTTP_200_OK)
+        except Users.DoesNotExist:
+            return Response(
+                {"error": "User with this national code does not exist."},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+
 
 class GetUserTeamRole(APIView):
-
     def get(self, request, *args, **kwargs):
         username = kwargs.get('username')
         qs = UserTeamRole.objects.filter(UserName__UserName=username)
@@ -68,6 +77,57 @@ class GetUserTeamRole(APIView):
 
         return Response({'state':'error'}, status=status.HTTP_400_BAD_REQUEST)
 
+class GetUserTeamRoleByNationalCode(APIView):
+    def get(self, request, national_code):
+        qs = UserTeamRole.objects.filter(NationalCode=national_code)
+        if qs:
+            if "return_dict" in request.GET:
+                qs = qs.values()
+                data = {item.get('TeamCode_id'):item for item in qs}
+            else:
+                user_team_role_serializer = UserTeamRoleWithNationalCodeSerializer(qs,many=True)
+                data = user_team_role_serializer.data
+            return Response({'data':data},status=status.HTTP_200_OK)
+        return Response({'state':'error'}, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class GetUserAllTeamRole(APIView):
+
+    def get(self, request, *args, **kwargs):
+        username = kwargs.get('username')
+        current_teamroles = UserTeamRole.objects.filter(UserName__UserName=username)
+        previous_teamroles = PreviousUserTeamRole.objects.filter(UserName__UserName=username)
+        
+        
+        if current_teamroles or previous_teamroles:
+            current_teamroles_serialized = UserTeamRoleSerializer(current_teamroles, many=True).data
+            previous_teamroles_serialized = UserTeamRoleSerializer(previous_teamroles, many=True).data
+        
+            return Response(
+                {
+                    'data':current_teamroles_serialized+previous_teamroles_serialized},
+                    status=status.HTTP_200_OK
+                )
+
+        return Response({'state':'error', "desc":"record not found!"}, status=status.HTTP_404_NOT_FOUND)
+
+class GetUserAllTeamRoleByNationalCode(APIView):
+    def get(self, request, national_code):
+        current_teamroles = UserTeamRole.objects.filter(NationalCode=national_code)
+        previous_teamroles = PreviousUserTeamRole.objects.filter(NationalCode=national_code)
+        
+        
+        if current_teamroles or previous_teamroles:
+            current_teamroles_serialized = UserTeamRoleWithNationalCodeSerializer(current_teamroles, many=True).data
+            previous_teamroles_serialized = UserTeamRoleWithNationalCodeSerializer(previous_teamroles, many=True).data
+        
+            return Response(
+                {
+                    'data':current_teamroles_serialized+previous_teamroles_serialized},
+                    status=status.HTTP_200_OK
+                )
+
+        return Response({'state':'error', "desc":"record not found!"}, status=status.HTTP_404_NOT_FOUND)
 
 class GetUserTeamRoles(APIView):
 
@@ -94,6 +154,13 @@ class GetUserRoles(APIView):
         if qs:
             return Response({'data':list(qs.values_list("RoleId_id",flat=True))},status=status.HTTP_200_OK)
 
+        return Response({'state':'error'}, status=status.HTTP_400_BAD_REQUEST)
+
+class GetUserRolesByNationalCode(APIView):
+    def get(self, request, national_code):
+        qs = UserTeamRole.objects.filter(NationalCode=national_code)
+        if qs:
+            return Response({'data':list(qs.values_list("RoleId_id",flat=True))},status=status.HTTP_200_OK)
         return Response({'state':'error'}, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -183,7 +250,7 @@ class ExistsRole(APIView):
 class AllTeamService(APIView):
     def get(self, request, *args, **kwargs):
         qs = Team.objects.filter(ActiveInService=True)
-        team_serializer = AllTeamServiceSerializer(qs,many=True)
+        team_serializer = TeamSerializer(qs,many=True)
         if team_serializer:
             return Response({'data':team_serializer.data},status=status.HTTP_200_OK)
 
@@ -193,7 +260,7 @@ class AllTeamService(APIView):
 class AllTeamEvaluation(APIView):
     def get(self, request, *args, **kwargs):
         qs = Team.objects.filter(ActiveInEvaluation=True)
-        team_serializer = AllTeamServiceSerializer(qs,many=True)
+        team_serializer = TeamSerializer(qs,many=True)
         if team_serializer:
             return Response({'data':team_serializer.data},status=status.HTTP_200_OK)
 
@@ -203,7 +270,7 @@ class AllTeamEvaluation(APIView):
 class FindTeam(APIView):
     def get(self, request, *args, **kwargs):
         qs = Team.objects.filter(**request.data).first()
-        team_serializer = AllTeamServiceSerializer(qs)
+        team_serializer = TeamSerializer(qs)
         if team_serializer:
             return Response({'data':team_serializer.data},status=status.HTTP_200_OK)
 
@@ -298,6 +365,29 @@ class CallSpGetTargetRole(APIView):
             return Response(data={'state':_state,'data':data},status=_status)
 
 
+class CallSpGetTargetRoleByNationalCode(APIView):
+    # call_sp_get_target_role_by_national_code  
+    def get(self, request, *args , **kwargs):
+        cursor = connections['default'].cursor()
+        _status = status.HTTP_200_OK
+        _state = 'ok'
+        try:
+            InfoID = UserTeamRole.objects.filter(
+                NationalCode=request.data.get('InfoID'),
+                TeamCode_id=request.data.get('TeamCode')).first()
+            InfoID = InfoID.id if InfoID else 0
+            cursor.execute("EXEC [dbo].[HR_GetTargetRole] @ID = %s,@Type = %s" % (InfoID, request.data.get('Type')))
+            data = cursor.fetchall()
+        except:
+            _status = status.HTTP_500_INTERNAL_SERVER_ERROR
+            _state = 'error'
+            traceback.print_exc()
+            data = []
+        finally:
+            cursor.close()
+            return Response(data={'state':_state,'data':data},status=_status)
+
+
 class CallFuncEducatorGetTeamManager(APIView):
     # call_func_educator_get_team_manager
     def get(self, request, *args, **kwargs):
@@ -327,6 +417,7 @@ class GetPreviousUserTeamRoles(APIView):
             for item in qs:
                 obj = {
                     'UserName':item.UserName.UserName,
+                    'NationalCode':item.NationalCode,
                     'FullName':item.UserName.FullName,
                     'Gender':item.UserName.Gender,
                     'TeamCode':item.TeamCode.TeamCode,
@@ -337,6 +428,7 @@ class GetPreviousUserTeamRoles(APIView):
                     'LevelName':item.LevelId.LevelName if item.LevelId_id else None,
                     'Superior':item.Superior,
                     'ManagerUserName':item.ManagerUserName.UserName,
+                    'ManagerNationalCode':item.ManagerNationalCode,
                     'StartDate':item.StartDate,
                     'EndDate':item.EndDate,
                     'Birth':item.get_birth,
@@ -345,3 +437,4 @@ class GetPreviousUserTeamRoles(APIView):
                 data.append(obj)
             return Response({'data':data},status=status.HTTP_200_OK)
         return Response({'state':'error'}, status=status.HTTP_400_BAD_REQUEST)
+

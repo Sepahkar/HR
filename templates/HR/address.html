@@ -25,10 +25,8 @@
              <td>{{ obj.PostalCode|default_if_none:'' }}</td>
              <td>{{ obj.City.CityTitle|default_if_none:'' }}</td>
             <td>{% if obj.IsDefault %}
-{#               <img class="img icon_check"  src="/static/HR/images/Icon/Confirm.png">#}
                 <i class="fa-solid fa-check"></i>
             {% else %}
-{#               <img class="img icon_check" src="/static/HR/images/Icon/Cancel.png">#}
                 <i class="fa-solid fa-check"></i>
             {% endif %}</td>
 

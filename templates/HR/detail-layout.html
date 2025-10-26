@@ -23,7 +23,6 @@
         {% if show_detail %}
 
         <span class="icon add">
-{#            <img src="/static/HR/images/icon/add.png" alt="اضافه كردن مورد جديد" class="icon" />#}
             <i class="fa-solid fa-plus "></i>
         </span>
         <div class="detail-fields">
@@ -31,6 +30,7 @@
             {% csrf_token %}
             <button type="reset" class="hidden {% block form_name7 %}{% endblock %}"></button>
             <input type="hidden" name="UserName" value="{{ username }}">
+            <input type="hidden" name="NationalCode" value="{{ national_code }}">
             <input type="hidden" name="{% block form_name8 %}{% endblock %}Id">
             <div class="row main-content">
                 {% block fieldes %}{% endblock %}
