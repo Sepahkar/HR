@@ -1,7 +1,7 @@
 import json
 import os
 import unicodedata
-import re
+
 import jdatetime
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
@@ -731,10 +731,6 @@ def UserSave(request, action_type=''):
 
                 # ابتدا اطلاعات باید دریافت شوند
                 username = request.POST.get('user_name')
-                pattern = r'^[a-zA-Z.]+$'
-                if not re.match(pattern, username):
-                    msg = 'نام کاربری صحیح نیست'
-                
                 if is_not_empty(username):
                     username += '@eit'
                 lastname = request.POST.get('last_name')

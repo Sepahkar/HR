@@ -17,10 +17,10 @@ import json
 from Utility.APIManager.Portal.register_document import v2 as register_doc_nCode
 from Utility.APIManager.Portal.send_document import ver2 as send_doc_nCode
 from Utility.APIManager.Portal.update_document import v1 as update_doc_nCode
-from Utility.APIManager.Portal.terminate import v1 as terminate_document_flow
+from Utility.APIManager.Portal.terminate_flow import v1 as terminate_document_flow
 from Utility.APIManager.Portal.success_finish import v1 as success_finish_document_flow
 from Utility.APIManager.Portal.failed_finish import v1 as failed_finish_document_flow
-from Utility.APIManager.Notfication.email import v1 as notify
+from Utility.APIManager.Notification.send_email import v1 as notify
 
 import ast
 from django.contrib.auth import get_user_model

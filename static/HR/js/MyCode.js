@@ -548,11 +548,6 @@ function Save(SaveIcon)
     e = Validator(detail_type)
     let Form = $("form[name='frm"+detail_type+"']")
 
-    //جلوگیری از درج کارکتر غیرمجاز در نام کاربری
-    val = $('#user_name').val()
-    val = val.replace(/[^a-zA-Z.]/g, '')
-    $('#user_name').val(val)
-
     if (e >= 0)
     {
         //if select item is null, it would be deleted from serialization action
